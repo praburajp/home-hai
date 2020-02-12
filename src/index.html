@@ -7,10 +7,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="./assets/jquery.syotimer.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-  <script src="/bower_components/jquery.countdown/dist/jquery.countdown.js"></script>
+  <script>
+    jQuery(document).ready(function($) {
+    setInterval(function() {
+        // Countdown variables
+        var today = new Date();
+        var days = countdown(today);
+        var hours = (days - Math.floor(days)) * 24;
+        var minutes = (hours - Math.floor(hours)) * 60;
+        var seconds = (minutes - Math.floor(minutes)) * 60;
+
+        // Countdown values
+        var values = {
+            "days" : days,
+            "hours" : hours,
+            "minutes" : minutes,
+            "seconds" : seconds
+        };
+
+        $.each(values, function(key, value) {
+            if (Math.floor(value) <= 9) {
+                $('p span.' + key).text("0" + Math.floor(value));
+            } else {
+                $('p span.' + key).text(Math.floor(value));
+            }
+        });
+
+        function countdown(today) {
+            countdownDate = new Date("April 14, 2020 00:00:00");
+            year = today.getFullYear();
+            countdownDate.setFullYear(year);
+
+            days = (countdownDate - today) / (1000 * 60 * 60 * 24);
+            return days;
+        }
+
+        if (days < 0) {
+            $('.days, .hours, .minutes, .seconds').text("00");
+        }
+    }, 1000);
+});
+
+  </script>
+  
   <app-root></app-root>
-  <script src="./assets/new.js"></script>
 </body>
 </html>
+ 
