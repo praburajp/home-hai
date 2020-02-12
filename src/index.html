@@ -31,9 +31,9 @@
 
         $.each(values, function(key, value) {
             if (Math.floor(value) <= 9) {
-                $('p span.' + key).text("0" + Math.floor(value));
+                $('span.' + key).text("0" + Math.floor(value));
             } else {
-                $('p span.' + key).text(Math.floor(value));
+                $('span.' + key).text(Math.floor(value));
             }
         });
 
